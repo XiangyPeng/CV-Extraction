@@ -8,8 +8,8 @@ from src.config import JSON_OUTPUT_DIR
 from src.database import init_db, list_resumes, save_resume, save_resume_json
 from src.pipeline import process_document
 
-st.set_page_config(page_title="AI Resume Parser", layout="wide")
-st.title("AI Resume Parser")
+st.set_page_config(page_title="CV-Extraction", layout="wide")
+st.title("CV-Extraction")
 
 init_db()
 

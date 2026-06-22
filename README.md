@@ -1,5 +1,5 @@
 
-# AI Resume Parser
+# CV-Extraction
 
 This repository implements a local end-to-end resume parsing solution for a take-home case study. It covers text extraction, validation, transformation, and structured storage.
 
@@ -28,7 +28,7 @@ Create a `.env` file in the project root with your OpenAI credentials:
 OPENAI_API_KEY=sk-proj-your-api-key-here
 OPENAI_MODEL=gpt-4o-mini
 OPENAI_BASE_URL=https://api.openai.com/v1
-DATABASE_URL=sqlite:///cv_parser.db
+DATABASE_URL=sqlite:///cv_extraction.db
 JSON_OUTPUT_DIR=output
 LOG_LEVEL=INFO
 ```

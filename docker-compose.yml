@@ -1,6 +1,6 @@
 
 services:
-  cv-parser:
+  cv-extraction:
     build: .
     ports:
       - "8501:8501"
