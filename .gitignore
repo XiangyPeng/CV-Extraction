@@ -1,0 +1,24 @@
+# Environment variables (contains API keys - never commit)
+.env
+
+# Virtual environment
+.venv/
+venv/
+env/
+.env/
+
+# Database
+*.db
+
+# Output files (parsed resume data)
+output/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
