@@ -1,0 +1,10 @@
+
+streamlit
+pydantic
+pymupdf
+openai
+sqlalchemy
+python-dotenv
+pandas
+email-validator
+pytest
