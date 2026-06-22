@@ -1,5 +1,6 @@
 # Environment variables (contains API keys - never commit)
 .env
+!.env.example
 
 # Virtual environment
 .venv/
@@ -11,13 +12,22 @@ env/
 *.db
 
 # Output files (parsed resume data)
-output/
+output/*
+!output/.gitkeep
+
+# Local-only files
+Take-Home Case Study*.pdf
+tall GitHub.cli
 
 # Python cache
 __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+
+# Editor
+.vscode/
+.idea/
 
 # OS
 .DS_Store
