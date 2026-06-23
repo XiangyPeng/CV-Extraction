@@ -1,8 +1,24 @@
 {
-  "name": "Sample Candidate",
-  "email": "candidate@example.com",
-  "phone": "5550100",
-  "skills": ["Python", "Machine Learning", "Data Analysis"],
-  "education": ["Bachelor of Science in Computer Science"],
-  "experience": ["Senior Software Engineer", "Data Scientist"]
+  "name": "John Snow",
+  "email": "me@myself.me",
+  "phone": "+0123456789",
+  "skills": [
+    "Pizza",
+    "Chocolate",
+    "Spacecrafts",
+    "Star wars",
+    "Narcos",
+    "Team work",
+    "Hard work",
+    "Any softskill",
+    "Programming lang"
+  ],
+  "education": [
+    "{'degree': 'M.Sc. Snack Science', 'institution': 'University of Nowhere', 'years': '2019 – 2021 (expected)', 'details': ['Curriculum Cocoa and derivatives', 'Current GPA: 3.5']}",
+    "{'degree': 'B.Sc. Snack Science', 'institution': 'University of Nowhere', 'years': '2016 – 2019', 'details': ['Final grade: the highest!', 'GPA: 3', \"Thesis: 'Pizza is the best: a comparative analysis'\"]}"
+  ],
+  "experience": [
+    "{'title': 'Another Summer Internship', 'company': 'Yet another best place in the world', 'years': 'Jul – Sep 2019 (10 weeks)', 'location': 'Kangaroo island, Australia', 'description': ['Saw many many animals', 'Increased by animal knowledge by 100% by getting to know the best jumping animals in the whole world.']}",
+    "{'title': 'Summer Internship', 'company': 'The best place in the world', 'years': 'Jul – Sep 2019 (10 weeks)', 'location': 'Pisa, Italy', 'description': ['Studied how leaned is the leaning tower', 'Increased tower leaning by 0.00001% by climbing on it using my climbing skills (I have proﬁciency).', 'IRL, this section should be bigger but I’m out of fantasy']}"
+  ]
 }

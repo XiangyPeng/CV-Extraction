@@ -4,11 +4,11 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text # OCM library for database connection and SQL execution
 
 from .config import DATABASE_URL, JSON_OUTPUT_DIR
 
-engine = create_engine(DATABASE_URL, future=True)
+engine = create_engine(DATABASE_URL, future=True) # create SQLAlchemy engine for database connection
 
 
 def _slugify(value: str) -> str:

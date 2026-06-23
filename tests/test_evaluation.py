@@ -13,9 +13,9 @@ def test_load_ground_truth():
     truth_path = Path("tests/ground_truth/CV1_ground_truth.json")
     truth = load_ground_truth(truth_path)
 
-    assert truth["name"] == "Sample Candidate"
-    assert truth["email"] == "candidate@example.com"
-    assert truth["phone"] == "5550100"  # Phone format: cleaned digits only
+    assert truth["name"] == "John Snow"
+    assert truth["email"] == "me@myself.me"
+    assert truth["phone"] == "+0123456789"
     assert isinstance(truth["skills"], list)
     assert len(truth["skills"]) > 0
 
@@ -43,6 +43,19 @@ def test_score_field_list_partial_match():
     truth = ["Python", "JavaScript"]
     score = score_field(predicted, truth)
     assert score == 0.5  # Only 1 of 2 skills matched
+
+
+def test_score_field_structured_aliases_not_zero():
+    """Structured strings with key aliases should receive non-zero score."""
+    predicted = [
+        "{'title': 'Intern', 'duration': '2020', 'responsibilities': ['Built APIs']}"
+    ]
+    truth = [
+        "{'title': 'Intern', 'years': '2020', 'description': ['Built APIs']}"
+    ]
+
+    score = score_field(predicted, truth)
+    assert score > 0.0
 
 
 def test_evaluate_extraction_against_ground_truth():
@@ -76,12 +89,28 @@ def test_evaluation_with_perfect_extraction():
 
     # Create a resume that exactly matches ground truth
     extracted_resume = Resume(
-        name="Sample Candidate",
-        email="candidate@example.com",
-        phone="5550100",
-        skills=["Python", "Machine Learning", "Data Analysis"],
-        education=["Bachelor of Science in Computer Science"],
-        experience=["Senior Software Engineer", "Data Scientist"],
+        name="John Snow",
+        email="me@myself.me",
+        phone="+0123456789",
+        skills=[
+            "Pizza",
+            "Chocolate",
+            "Spacecrafts",
+            "Star wars",
+            "Narcos",
+            "Team work",
+            "Hard work",
+            "Any softskill",
+            "Programming lang",
+        ],
+        education=[
+            "{'degree': 'M.Sc. Snack Science', 'institution': 'University of Nowhere', 'years': '2019 – 2021 (expected)', 'details': ['Curriculum Cocoa and derivatives', 'Current GPA: 3.5']}",
+            "{'degree': 'B.Sc. Snack Science', 'institution': 'University of Nowhere', 'years': '2016 – 2019', 'details': ['Final grade: the highest!', 'GPA: 3', \"Thesis: 'Pizza is the best: a comparative analysis'\"]}"
+        ],
+        experience=[
+            "{'title': 'Another Summer Internship', 'company': 'Yet another best place in the world', 'years': 'Jul – Sep 2019 (10 weeks)', 'location': 'Kangaroo island, Australia', 'description': ['Saw many many animals', 'Increased by animal knowledge by 100% by getting to know the best jumping animals in the whole world.']}",
+            "{'title': 'Summer Internship', 'company': 'The best place in the world', 'years': 'Jul – Sep 2019 (10 weeks)', 'location': 'Pisa, Italy', 'description': ['Studied how leaned is the leaning tower', 'Increased tower leaning by 0.00001% by climbing on it using my climbing skills (I have proﬁciency).', 'IRL, this section should be bigger but I’m out of fantasy']}"
+        ],
         raw_text="sample text",
         confidence=0.95,
     )

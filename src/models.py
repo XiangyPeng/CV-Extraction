@@ -1,25 +1,25 @@
 import re
 from typing import List, Optional
-from pydantic import BaseModel, EmailStr, Field, field_validator
+from pydantic import BaseModel, EmailStr, Field, field_validator # check data between LLM and database
 
-PHONE_CLEAN = re.compile(r"[^\d+]+")
+PHONE_CLEAN = re.compile(r"[^\d+]+") # delete all non-digit characters except for the leading '+' sign
 
 
 class Resume(BaseModel):
     name: str
     email: EmailStr
     phone: Optional[str] = None
-    skills: List[str] = Field(default_factory=list)
+    skills: List[str] = Field(default_factory=list) 
     education: List[str] = Field(default_factory=list)
     experience: List[str] = Field(default_factory=list)
     raw_text: Optional[str] = None
-    confidence: float = 0.0
+    confidence: float = 0.0 
 
-    model_config = {"extra": "forbid"}
+    model_config = {"extra": "forbid"} # forbid extra fields not defined in the model
 
     @field_validator("name")
     def validate_name(cls, value: str) -> str:
-        value = value.strip()
+        value = value.strip() # only take name itself
         if not value:
             raise ValueError("Name must not be empty")
         return value
@@ -33,7 +33,7 @@ class Resume(BaseModel):
             raise ValueError("Phone number is too short or may be invalid")
         return cleaned
 
-    @field_validator("skills", "education", "experience", mode="before")
+    @field_validator("skills", "education", "experience", mode="before") # normalize list fields before validation
     def normalize_list_fields(cls, value):
         if value is None:
             return []

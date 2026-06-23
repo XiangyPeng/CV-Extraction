@@ -15,6 +15,6 @@ def process_document(pdf_path: str | Path, save_db: bool = False, save_json: boo
             save_resume_json(result.resume)
     return result
 
-
+# Process multiple documents in batch and return a list of results
 def process_documents(paths: Iterable[str | Path], save_db: bool = False, save_json: bool = False) -> list[ExtractionResult]:
     return [process_document(path, save_db=save_db, save_json=save_json) for path in paths]

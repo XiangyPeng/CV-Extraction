@@ -28,10 +28,10 @@ def _openai_client() -> Any:
         from openai import OpenAI
     except ModuleNotFoundError as exc:
         raise ValueError("openai package is not installed. Run `pip install -r requirements.txt`.") from exc
-    return OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
+    return OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL) # return OpenAI client
 
 
-def _clean_code_fence(text: str) -> str:
+def _clean_code_fence(text: str) -> str: # remove code fences from text
     if "```" in text:
         parts = text.split("```")
         if len(parts) >= 3:
@@ -39,17 +39,17 @@ def _clean_code_fence(text: str) -> str:
     return text.strip()
 
 
-def _normalize_text(text: str) -> str:
+def _normalize_text(text: str) -> str: # normalize text by removing control characters and extra whitespace
     text = re.sub(r"[\x00-\x1f\x7f]+", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
-def _clean_line(text: str) -> str:
+def _clean_line(text: str) -> str: # clean a line of text by normalizing and stripping unwanted characters
     cleaned = _normalize_text(text)
     return cleaned.strip(" •●*·-–—:")
 
 
-def _parse_llm_response(response: Dict[str, Any]) -> Dict[str, Any]:
+def _parse_llm_response(response: Dict[str, Any]) -> Dict[str, Any]: # parse the response from the LLM and extract JSON content
     content = response.get("message", {}).get("content")
     if isinstance(content, list):
         content = content[0]
@@ -96,7 +96,7 @@ def _looks_like_contact_line(text: str) -> bool:
     return any(keyword in normalized for keyword in keywords)
 
 
-def _is_section_heading(text: str) -> bool:
+def _is_section_heading(text: str) -> bool: # check if a line of text looks like a section heading
     normalized = text.lower().strip()
     if SECTION_HEADING.match(normalized):
         return True
@@ -130,7 +130,7 @@ def _is_section_heading(text: str) -> bool:
     return any(normalized.startswith(extra) for extra in extras)
 
 
-def _looks_like_date_or_timeline(text: str) -> bool:
+def _looks_like_date_or_timeline(text: str) -> bool: # check if a line of text looks like a date or timeline
     normalized = text.lower()
     if re.search(r"\b(\d{4}|present|ongoing|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|summer|fall|winter|spring)\b", normalized):
         return True
@@ -251,7 +251,7 @@ def _estimate_confidence(resume: Resume, source: str) -> float:
     return float(max(0.0, min(1.0, score)))
 
 
-def extract_text(pdf_path: str) -> str:
+def extract_text(pdf_path: str) -> str: # extract text from a PDF file using PyMuPDF (fitz)
     doc = fitz.open(pdf_path)
     pages = [page.get_text("text") for page in doc]
     return "\n".join(pages).strip()
@@ -320,7 +320,7 @@ Resume content:\n{text}
             ],
         )
         data = _parse_openai_response(response)
-        resume = Resume(**data, raw_text=text)
+        resume = Resume(**data, raw_text=text) # llm generated dict to Resume model
         source = "llm"
     except ValueError as exc:
         warnings.append("OPENAI_API_KEY is missing; using heuristic fallback.")
