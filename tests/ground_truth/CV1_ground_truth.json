@@ -1,0 +1,8 @@
+{
+  "name": "Sample Candidate",
+  "email": "candidate@example.com",
+  "phone": "5550100",
+  "skills": ["Python", "Machine Learning", "Data Analysis"],
+  "education": ["Bachelor of Science in Computer Science"],
+  "experience": ["Senior Software Engineer", "Data Scientist"]
+}
